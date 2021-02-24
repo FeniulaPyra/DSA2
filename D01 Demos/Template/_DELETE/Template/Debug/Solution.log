@@ -1,0 +1,11 @@
+﻿  Foo.cpp
+  Main.cpp
+  Generating Code...
+  Solution.vcxproj -> D:\IGME309.01\igme309-2205\D01 Demos\Template\_DELETE\Template_d.exe
+  Copying binary…
+  The filename, directory name, or volume label syntax is incorrect.
+  Error occurred while processing: “D:\IGME309.01\igme309-2205\D01.
+  The syntax of the command is incorrect.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(153,5): error MSB3073: The command "mkdir “D:\IGME309.01\igme309-2205\D01 Demos\Template\Binary\”
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(153,5): error MSB3073: copy “D:\IGME309.01\igme309-2205\D01 Demos\Template\_DELETE\Template_d.exe” “D:\IGME309.01\igme309-2205\D01 Demos\Template\Binary”
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(153,5): error MSB3073: :VCEnd" exited with code 1.

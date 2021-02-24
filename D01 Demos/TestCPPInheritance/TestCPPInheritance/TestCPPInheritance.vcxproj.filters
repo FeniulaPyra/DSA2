@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Virtual Functions">
+      <UniqueIdentifier>{715f19c3-baa1-4ef9-bc88-2f62b7974af6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Virtual Functions">
+      <UniqueIdentifier>{e4f1eec5-dbfa-4eaf-8419-eb2dfc3f64ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Data Members">
+      <UniqueIdentifier>{aa711c3f-6688-456d-96a6-5f40a3dc54e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data Members">
+      <UniqueIdentifier>{b9031f16-798c-4acd-a083-0bbcc881324d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Basic Functions %28no virtual%29">
+      <UniqueIdentifier>{93c89e2c-e4db-48fd-a072-215dcf7b229d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Basic Functions %28no virtual%29">
+      <UniqueIdentifier>{44b990b5-4331-4e12-9b13-a5a05642187c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Static">
+      <UniqueIdentifier>{ba59c397-4619-40e8-aded-17688b5cf3c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Static">
+      <UniqueIdentifier>{8d25f6d8-612f-42a1-8f00-db933b39b189}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Super">
+      <UniqueIdentifier>{e1b379dc-5308-4db7-8ffd-bb48b644ce6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Super">
+      <UniqueIdentifier>{da6d0c1c-d56d-4b4c-b225-fe89c196ba17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Casting">
+      <UniqueIdentifier>{72186e2d-4ffe-4058-8a20-1bb143054309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Casting">
+      <UniqueIdentifier>{355e5d82-b7f9-4d81-9246-9f8512e4ecd6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Animal.cpp">
+      <Filter>Source Files\Virtual Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="B1.cpp">
+      <Filter>Source Files\Data Members</Filter>
+    </ClCompile>
+    <ClCompile Include="D1.cpp">
+      <Filter>Source Files\Data Members</Filter>
+    </ClCompile>
+    <ClCompile Include="B2.cpp">
+      <Filter>Source Files\Basic Functions %28no virtual%29</Filter>
+    </ClCompile>
+    <ClCompile Include="D2.cpp">
+      <Filter>Source Files\Basic Functions %28no virtual%29</Filter>
+    </ClCompile>
+    <ClCompile Include="B3.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="D3.cpp">
+      <Filter>Source Files\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bear.cpp">
+      <Filter>Source Files\Virtual Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="AS.cpp">
+      <Filter>Source Files\Super</Filter>
+    </ClCompile>
+    <ClCompile Include="BS.cpp">
+      <Filter>Source Files\Super</Filter>
+    </ClCompile>
+    <ClCompile Include="CS.cpp">
+      <Filter>Source Files\Super</Filter>
+    </ClCompile>
+    <ClCompile Include="Student.cpp">
+      <Filter>Source Files\Casting</Filter>
+    </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>Source Files\Casting</Filter>
+    </ClCompile>
+    <ClCompile Include="Junior.cpp">
+      <Filter>Source Files\Casting</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animal.h">
+      <Filter>Header Files\Virtual Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="B1.h">
+      <Filter>Header Files\Data Members</Filter>
+    </ClInclude>
+    <ClInclude Include="D1.h">
+      <Filter>Header Files\Data Members</Filter>
+    </ClInclude>
+    <ClInclude Include="B2.h">
+      <Filter>Header Files\Basic Functions %28no virtual%29</Filter>
+    </ClInclude>
+    <ClInclude Include="D2.h">
+      <Filter>Header Files\Basic Functions %28no virtual%29</Filter>
+    </ClInclude>
+    <ClInclude Include="B3.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="D3.h">
+      <Filter>Header Files\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Bear.h">
+      <Filter>Header Files\Virtual Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="AS.h">
+      <Filter>Header Files\Super</Filter>
+    </ClInclude>
+    <ClInclude Include="BS.h">
+      <Filter>Header Files\Super</Filter>
+    </ClInclude>
+    <ClInclude Include="CS.h">
+      <Filter>Header Files\Super</Filter>
+    </ClInclude>
+    <ClInclude Include="Student.h">
+      <Filter>Header Files\Casting</Filter>
+    </ClInclude>
+    <ClInclude Include="Person.h">
+      <Filter>Header Files\Casting</Filter>
+    </ClInclude>
+    <ClInclude Include="Junior.h">
+      <Filter>Header Files\Casting</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
