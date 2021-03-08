@@ -542,7 +542,7 @@ void MyMesh::GenerateSphere(float a_fRadius, int a_nSubdivisions, vector3 a_v3Co
 	}
 	if (a_nSubdivisions > 6)
 		a_nSubdivisions = 6;
-	//a_nSubdivisions = 10;
+	a_nSubdivisions = 100;
 	Release();
 	Init();
 
@@ -590,6 +590,43 @@ void MyMesh::GenerateSphere(float a_fRadius, int a_nSubdivisions, vector3 a_v3Co
 	// -------------------------------
 
 	// Adding information about color
+	CompleteMesh(a_v3Color);
+	CompileOpenGL3X();
+}
+void MyMesh::GenerateSphereAgain(float a_fRadius, int a_nSubdivisions, vector3 a_v3Color)
+{
+	Release();
+	Init();
+	float iteration = (PI / 180.0f);
+	for (float theta = 0; theta < PI; theta += iteration) {
+		for (float phi = 0; phi < PI * 2; phi += iteration) {
+
+			//float thetaRads = theta * PI / 180;
+			//float phiRads = phi * PI / 180;
+
+			vector3 a = vector3(sin(phi) * cos(theta),
+				sin(phi) * sin(theta),
+				cos(phi));
+				//*a_fRadius;
+
+			float phiB = phi + iteration;
+			float thetaB = theta + iteration;
+
+			vector3 b = vector3(sin(phiB) * cos(thetaB),
+				sin(phiB) * sin(thetaB),
+				cos(phiB));//*a_fRadius;
+			
+			float phiC = phi + 2 * iteration;
+			float thetaC = theta + 2 * iteration;
+
+			vector3 c = vector3(sin(phiC) * cos(thetaC),
+				sin(phiC) * sin(thetaC),
+				cos(phiC));//*a_fRadius;
+			
+			AddTri(a, b, c);
+		}
+	}
+	std::cout << "out" << std::endl;
 	CompleteMesh(a_v3Color);
 	CompileOpenGL3X();
 }

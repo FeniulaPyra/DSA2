@@ -26,6 +26,8 @@ void Application::InitVariables(void)
 	m_stopsList.push_back(vector3(5.0f, 2.0f, -5.0f));
 
 	m_stopsList.push_back(vector3(1.0f, 3.0f, -5.0f));
+
+
 }
 void Application::Update(void)
 {
@@ -50,7 +52,7 @@ void Application::Display(void)
 	static float fTimer = 0;	//store the new timer
 	static uint uClock = m_pSystem->GenClock(); //generate a new clock for that timer
 	fTimer += m_pSystem->GetDeltaTime(uClock); //get the delta time for that timer
-
+	
 	//calculate the current position
 	vector3 v3CurrentPos;
 	
@@ -59,7 +61,34 @@ void Application::Display(void)
 
 
 	//your code goes here
-	v3CurrentPos = vector3(0.0f, 0.0f, 0.0f);
+	static int routePt = 0;
+
+	//v3CurrentPos = vector3(0.0f, 0.0f, 0.0f);
+
+	float percentage = MapValue(fTimer, 0.0f, 2.0f, 0.0f, 1.0f);
+
+	vector3 start;
+	vector3 end;
+
+	if (routePt < m_stopsList.size() - 1) {
+		start = m_stopsList[routePt];
+		end = m_stopsList[routePt + 1];
+	}
+	else {
+		start = m_stopsList[m_stopsList.size() - 1];
+		end = m_stopsList[0];
+		routePt = -1;
+	}
+
+	v3CurrentPos = glm::lerp(start, end, percentage);
+
+	//std::cout << percentage << std::endl;
+
+	if (percentage >= 1.0) {
+		routePt++;
+		fTimer = 0;
+
+	}
 	//-------------------
 	
 

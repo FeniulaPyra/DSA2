@@ -73,17 +73,32 @@ void AppClass::InitShaders(void)
 }
 void AppClass::InitVariables(void)
 {
+
+	/*
+	* -+|++
+	*=======
+	* --|+-
+	* 
+	*/
 	std::vector<glm::vec3> lVertex;
-	//vertex 1
-	lVertex.push_back(glm::vec3(-1.0f, -1.0f, 0.0f)); //position
-	lVertex.push_back(glm::vec3(1.0f, 0.0f, 0.0f)); //color
-	//vertex 2
-	lVertex.push_back(glm::vec3(1.0f, -1.0f, 0.0f)); //position
+	//vertex 1 - red
+	lVertex.push_back(glm::vec3(-1.0f, 0.0f, 0.0f)); //position
+	lVertex.push_back(glm::vec3(1.0f, 1.0f, 0.0f)); //color
+	//vertex 2 - green
+	lVertex.push_back(glm::vec3(0.0f, -1.0f, 0.0f)); //position
 	lVertex.push_back(glm::vec3(0.0f, 1.0f, 0.0f)); //color
-	//vertex 3
-	lVertex.push_back(glm::vec3(0.0f, 1.0f, 0.0f)); //position
+	//vertex 3 - blue
+	lVertex.push_back(glm::vec3(1.0f, 0.0f, 0.0f)); //position
 	lVertex.push_back(glm::vec3(0.0f, 0.0f, 1.0f)); //color
-	
+	//vertex 3 - yellow
+	lVertex.push_back(glm::vec3(0.0f, 1.0f, 0.0f)); //position
+	lVertex.push_back(glm::vec3(1.0f, 0.0f, 0.0f)); //color
+
+	std::cout << lVertex[0].x << " " << lVertex[0].y << std::endl;
+	std::cout << lVertex[2].x << " " << lVertex[2].y << std::endl;
+	std::cout << lVertex[4].x << " " << lVertex[4].y << std::endl;
+	//std::cout << lVertex[6].x << " " << lVertex[6].y << std::endl;
+
 	glGenVertexArrays(1, &m_uVAO);//Generate vertex array object
 	glGenBuffers(1, &m_uVBO);//Generate Vertex Buffered Object
 
@@ -133,7 +148,8 @@ void AppClass::Display(void)
 
 
 	//draw content
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	//glDrawArrays(GL_TRIANGLES, 0, 4);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
 	// end the current frame (internally swaps the front and back buffers)
 	m_pWindow->display();
