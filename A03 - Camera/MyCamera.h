@@ -230,6 +230,8 @@ public:
 	OUTPUT: ---
 	*/
 	void MoveSideways(float a_fDistance = 0.1f);
+
+	void Rotate(float aboutXAxis, float aboutYAxis, float aboutZAxis = 0);
 };
 
 } //namespace Simplex
