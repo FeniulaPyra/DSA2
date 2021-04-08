@@ -227,8 +227,9 @@ void MyRigidBody::ClearCollidingList(void)
 bool MyRigidBody::IsColliding(MyRigidBody* const a_pOther)
 {
 	//check if spheres are colliding as pre-test
-	bool bColliding = (glm::distance(GetCenterGlobal(), a_pOther->GetCenterGlobal()) < m_fRadius + a_pOther->m_fRadius);
-	
+	//bool bColliding = (glm::distance(GetCenterGlobal(), a_pOther->GetCenterGlobal()) < m_fRadius + a_pOther->m_fRadius);
+	bool bColliding = true;
+
 	//if they are colliding check the SAT
 	if (bColliding)
 	{
@@ -286,6 +287,96 @@ uint MyRigidBody::SAT(MyRigidBody* const a_pOther)
 	Simplex that might help you [eSATResults] feel free to use it.
 	(eSATResults::SAT_NONE has a value of 0)
 	*/
+
+	float ra, rb;
+	matrix3 R, AbsR;
+
+	//vector3 au = GetCenterLocal() - GetMaxLocal();
+	vector3 au[3];
+	au[0] = GetModelMatrix()[0];
+	au[1] = GetModelMatrix()[1];
+	au[2] = GetModelMatrix()[2];
+	
+	vector3 bu[3];// = a_pOther->GetCenterLocal() - a_pOther->GetMaxLocal();
+	bu[0] = a_pOther->GetModelMatrix()[0];
+	bu[1] = a_pOther->GetModelMatrix()[1];
+	bu[2] = a_pOther->GetModelMatrix()[2];
+
+	vector3 ac = GetCenterGlobal();
+	vector3 bc = a_pOther->GetCenterGlobal();
+
+	vector3 ae = GetHalfWidth();
+	vector3 be = a_pOther->GetHalfWidth();
+
+
+	// Compute rotation matrix expressing b in a’s coordinate frame
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			R[i][j] = glm::dot(au[i], bu[j]);
+
+			//(GetCenterLocal() - GetMaxLocal())[i] * (a_pOther->GetCenterLocal() - a_pOther->GetMaxGlobal())[j];
+			//a.u[i] * b.u[j];
+		}
+	}
+	// Compute translation vector t
+	vector3 t = a_pOther->GetCenterGlobal() - GetCenterGlobal();//b.c - a.c;
+	// Bring translation into a’s coordinate frame
+	t = vector3(glm::dot(t, au[0]), glm::dot(t, au[1]), glm::dot(t, au[2]));
+	// Compute common subexpressions. Add in an epsilon term to
+	// counteract arithmetic errors when two edges are parallel and
+	// their cross product is (near) null (see text for details)
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			AbsR[i][j] = std::abs(R[i][j]) + glm::epsilon<float>();
+
+	// Test axes L = A0, L = A1, L = A2
+	for (int i = 0; i < 3; i++) {
+		ra = ae[i];//ou and sometimes y
+		rb = be[0] * AbsR[i][0] + be[1] * AbsR[i][1] + be[2] * AbsR[i][2];
+		if (std::abs(t[i]) > ra + rb) return eSATResults::SAT_AX + i;
+	}
+	// Test axes L = B0, L = B1, L = B2
+	for (int i = 0; i < 3; i++) {
+		ra = ae[0] * AbsR[0][i] + ae[1] * AbsR[1][i] + ae[2] * AbsR[2][i];
+		rb = be[i];
+		if (std::abs(t[0] * R[0][i] + t[1] * R[1][i] + t[2] * R[2][i]) > ra + rb) return eSATResults::SAT_BX + i;
+	}
+	// Test axis L = A0 x B0
+	ra = ae[1] * AbsR[2][0] + ae[2] * AbsR[1][0];
+	rb = be[1] * AbsR[0][2] + be[2] * AbsR[0][1];
+	if (std::abs(t[2] * R[1][0] - t[1] * R[2][0]) > ra + rb) return eSATResults::SAT_AXxBX;
+	// Test axis L = A0 x B1
+	ra = ae[1] * AbsR[2][1] + ae[2] * AbsR[1][1];
+	rb = be[0] * AbsR[0][2] + be[2] * AbsR[0][0];
+	if (std::abs(t[2] * R[1][1] - t[1] * R[2][1]) > ra + rb) return eSATResults::SAT_AXxBY;
+	// Test axis L = A0 x B2
+	ra = ae[1] * AbsR[2][2] + ae[2] * AbsR[1][2];
+	rb = be[0] * AbsR[0][1] + be[1] * AbsR[0][0];
+	if (std::abs(t[2] * R[1][2] - t[1] * R[2][2]) > ra + rb) return eSATResults::SAT_AXxBZ;
+	// Test axis L = A1 x B0
+	ra = ae[0] * AbsR[2][0] + ae[2] * AbsR[0][0];
+	rb = be[1] * AbsR[1][2] + be[2] * AbsR[1][1];
+	if (std::abs(t[0] * R[2][0] - t[2] * R[0][0]) > ra + rb) return eSATResults::SAT_AYxBX;
+	// Test axis L = A1 x B1
+	ra = ae[0] * AbsR[2][1] + ae[2] * AbsR[0][1];
+	rb = be[0] * AbsR[1][2] + be[2] * AbsR[1][0];
+	if (std::abs(t[0] * R[2][1] - t[2] * R[0][1]) > ra + rb) return eSATResults::SAT_AYxBY;
+	// Test axis L = A1 x B2
+	ra = ae[0] * AbsR[2][2] + ae[2] * AbsR[0][2];
+	rb = be[0] * AbsR[1][1] + be[1] * AbsR[1][0];
+	if (std::abs(t[0] * R[2][2] - t[2] * R[0][2]) > ra + rb) return eSATResults::SAT_AYxBZ;
+	// Test axis L = A2 x B0
+	ra = ae[0] * AbsR[1][0] + ae[1] * AbsR[0][0];
+	rb = be[1] * AbsR[2][2] + be[2] * AbsR[2][1];
+	if (std::abs(t[1] * R[0][0] - t[0] * R[1][0]) > ra + rb) return eSATResults::SAT_AZxBX;
+	// Test axis L = A2 x B1
+	ra = ae[0] * AbsR[1][1] + ae[1] * AbsR[0][1];
+	rb = be[0] * AbsR[2][2] + be[2] * AbsR[2][0];
+	if (std::abs(t[1] * R[0][1] - t[0] * R[1][1]) > ra + rb) return eSATResults::SAT_AZxBY;
+	// Test axis L = A2 x B2
+	ra = ae[0] * AbsR[1][2] + ae[1] * AbsR[0][2];
+	rb = be[0] * AbsR[2][1] + be[1] * AbsR[2][0];
+	if (std::abs(t[1] * R[0][2] - t[0] * R[1][2]) > ra + rb) return eSATResults::SAT_AZxBZ;
 
 	//there is no axis test that separates this two objects
 	return eSATResults::SAT_NONE;
